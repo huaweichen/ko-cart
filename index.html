@@ -11,66 +11,39 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12" id="catalog-container">
-            <h1>Catalog</h1>
-            <hr/>
-            <form class="form-horizontal" role="form" data-bind="with: newProduct">
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="text" class="form-control" placeholder="name" data-bind="textInput: name"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="text" class="form-control" placeholder="price" data-bind="textInput: price"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="text" class="form-control" placeholder="stock" data-bind="textInput: stock"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-default" data-bind="click: $parent.addProduct">
-                            <i class="glyphicon glyphicon-plus-sign"></i> Add Product
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <hr/>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> Search</span>
-                <input type="text" class="form-control" data-bind="textInput: searchTerm"/>
+        <div class="container-fluid">
+            <div class="row" id="catalog-container">
+                <div class="col-xs-12" data-bind="template:{name: 'header'}"></div>
+                <div class="col-xs-6" data-bind="template:{name: 'catalog'}"></div>
+                <div id="cartContainer" class="col-xs-6 well hidden" data-bind="template:{name:'cart'}"></div>
             </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                </tr>
-                </thead>
-                <tbody data-bind="foreach:catalog">
-                <tr>
-                    <td data-bind="text: name"></td>
-                    <td data-bind="text: price"></td>
-                    <td data-bind="text: stock"></td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="3">
-                        <strong>
-                            Total Items: <span data-bind="text: catalog().length"></span>
-                        </strong>
-                    </td>
-                </tr>
-                </tfoot>
-            </table>
+            <div class="row hidden" id="orderContainer" data-bind="template:{name:'order'}"></div>
+            <div data-bind="template: {name:'add-to-catalog-modal'}"></div>
+            <div data-bind="template: {name:'finish-order-modal'}"></div>
         </div>
     </div>
 </div>
+
+<!-- templates -->
+<script type="text/html" id="header">
+    <h1>Catalog</h1>
+    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-to-catalog-modal">
+        <i class="glyphicon glyphicon-plus-sign"></i> Add New Product
+    </button>
+    <button class="btn btn-primary btn-sm" data-toggle="modal" data-bind="click: showCartDetails, enable: cartHasProducts">
+        <i class="glyphicon glyphicon-book"></i> Show Cart Details
+    </button>
+    <hr/>
+</script>
+<script type="text/html" id="catalog"></script>
+<script type="text/html" id="cart"></script>
+<script type="text/html" id="order"></script>
+<script type="text/html" id="add-to-catalog-modal">
+
+</script>
+<script type="text/html" id="finish-order-modal"></script>
+<!-- end of templates -->
+
 <script type="text/javascript" src="js/library/knockout-3.2.0.js"></script>
 <script type="text/javascript" src="js/models/product.js"></script>
 <script type="text/javascript" src="js/viewmodel/viewmodel.js"></script>
