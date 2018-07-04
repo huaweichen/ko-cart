@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KO Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script type="text/javascript" src="js/library/jquery-2.2.0.js"></script>
+    <script type="text/javascript" src="js/library/bootstrap.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" id="catalog-container">
+            <h1>Catalog</h1>
+            <hr/>
+            <form class="form-horizontal" role="form" data-bind="with: newProduct">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" placeholder="name" data-bind="textInput: name"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" placeholder="price" data-bind="textInput: price"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" placeholder="stock" data-bind="textInput: stock"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-default" data-bind="click: $parent.addProduct">
+                            <i class="glyphicon glyphicon-plus-sign"></i> Add Product
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <hr/>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> Search</span>
+                <input type="text" class="form-control" data-bind="textInput: searchTerm"/>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach:catalog">
+                <tr>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: price"></td>
+                    <td data-bind="text: stock"></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <strong>
+                            Total Items: <span data-bind="text: catalog().length"></span>
+                        </strong>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/library/knockout-3.2.0.js"></script>
+<script type="text/javascript" src="js/models/product.js"></script>
+<script type="text/javascript" src="js/viewmodel/viewmodel.js"></script>
+</body>
+</html>
